@@ -1,5 +1,6 @@
 package com.qualitycolombia.mngsgind.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,13 @@ public class InformeService {
 		Informe informePorVendedor = new Informe();
 		Informe informePorZona = new Informe();
 		Informe informePorCiudad = new Informe();
+		LocalDateTime ultimaSincronizacion = null;
 
 		List<JSONObject> listaPorVendedor = ventasPorVendedor();
 		List<JSONObject> listaPorZona = ventasPorZona();
 		List<JSONObject> listaPorCiudad = ventasPorCiudad();
+		
+		ultimaSincronizacion = LocalDateTime.of(2024, 7, 10, 8, 34);
 
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode nodePorVendedor = mapper.readTree(listaPorVendedor.toString());
@@ -33,12 +37,15 @@ public class InformeService {
 
 		informePorVendedor.setTitulo("Ventas por vendedor");
 		informePorVendedor.setDetalleInf(nodePorVendedor);
+		informePorVendedor.setFechaSincronizacion(ultimaSincronizacion);
 		
 		informePorZona.setTitulo("Ventas por zona");
 		informePorZona.setDetalleInf(nodePorZona);
+		informePorZona.setFechaSincronizacion(ultimaSincronizacion);
 		
 		informePorCiudad.setTitulo("Ventas por ciudad");
 		informePorCiudad.setDetalleInf(nodePorCiudad);
+		informePorCiudad.setFechaSincronizacion(ultimaSincronizacion);
 		
 		resultado.add(informePorVendedor);
 		resultado.add(informePorZona);
@@ -51,9 +58,12 @@ public class InformeService {
 		List<Informe> resultado = new ArrayList<Informe>();
 		Informe informePorProducto = new Informe();
 		Informe informePorMes = new Informe();
+		LocalDateTime ultimaSincronizacion = null;
 		
 		List<JSONObject> listaPorProducto = ventasPorProducto();
 		List<JSONObject> listaPorMes = ventasPorMes();
+		
+		ultimaSincronizacion = LocalDateTime.of(2024, 7, 9, 15, 25);
 		
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode nodePorProducto = mapper.readTree(listaPorProducto.toString());
@@ -61,9 +71,11 @@ public class InformeService {
 		
 		informePorProducto.setTitulo("Ventas por producto");
 		informePorProducto.setDetalleInf(nodePorProducto);
+		informePorProducto.setFechaSincronizacion(ultimaSincronizacion);
 		
 		informePorMes.setTitulo("Ventas por mes");
 		informePorMes.setDetalleInf(nodePorMes);
+		informePorMes.setFechaSincronizacion(ultimaSincronizacion);
 		
 		resultado.add(informePorProducto);
 		resultado.add(informePorMes);
@@ -155,23 +167,23 @@ public class InformeService {
 	
 	public List<JSONObject> ventasPorMes() {
 		JSONObject enero = new JSONObject();
-		enero.put("producto", "Enero");
+		enero.put("mes", "Enero");
 		enero.put("ventas", 5500000);
 
 		JSONObject febrero = new JSONObject();
-		febrero.put("producto", "Febrero");
+		febrero.put("mes", "Febrero");
 		febrero.put("ventas", 3000000);
 		
 		JSONObject marzo = new JSONObject();
-		marzo.put("producto", "Marzo");
+		marzo.put("mes", "Marzo");
 		marzo.put("ventas", 8600000);
 		
 		JSONObject abril = new JSONObject();
-		abril.put("producto", "Abril");
+		abril.put("mes", "Abril");
 		abril.put("ventas", 6500000);
 		
 		JSONObject mayo = new JSONObject();
-		mayo.put("producto", "Mayo");
+		mayo.put("mes", "Mayo");
 		mayo.put("ventas", 9200000);
 
 		List<JSONObject> lista = new ArrayList<JSONObject>();
