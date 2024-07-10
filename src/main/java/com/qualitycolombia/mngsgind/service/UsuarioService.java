@@ -22,16 +22,13 @@ public class UsuarioService {
 		usuarioValidado2.setPerfil("ADM");
 		usuarioValidado2.setNit("9998");
 		
-		try {
 			if(u.getUsuario().equals(usuarioValidado1.getUsuario()) && u.getPassword().equals(usuarioValidado1.getPassword())) {
 				return usuarioValidado1;
 			} else if(u.getPassword().equals(usuarioValidado2.getPassword()) && u.getUsuario().equals(usuarioValidado2.getUsuario())) { 
 				return usuarioValidado2;
+			} else {
+				u = null;
 			}
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
 		return u;	
 	}
 

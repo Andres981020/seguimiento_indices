@@ -21,11 +21,14 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@PostMapping("/ingresar")
-	public ResponseEntity<Usuario> ingreso(@RequestBody Usuario u) {
+	public ResponseEntity<?> ingreso(@RequestBody Usuario u) {
 		
 		Usuario obj = usuarioService.validarIngreso(u);
-		
-		return new ResponseEntity<Usuario>(obj, HttpStatus.OK);
+		if(obj != null) {
+			return new ResponseEntity<Usuario>(obj, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }
