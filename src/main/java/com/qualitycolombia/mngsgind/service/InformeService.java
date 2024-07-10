@@ -22,14 +22,11 @@ public class InformeService {
 		Informe informePorVendedor = new Informe();
 		Informe informePorZona = new Informe();
 		Informe informePorCiudad = new Informe();
-		LocalDateTime ultimaSincronizacion = null;
 
 		List<JSONObject> listaPorVendedor = ventasPorVendedor();
 		List<JSONObject> listaPorZona = ventasPorZona();
 		List<JSONObject> listaPorCiudad = ventasPorCiudad();
 		
-		ultimaSincronizacion = LocalDateTime.of(2024, 7, 10, 8, 34);
-
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode nodePorVendedor = mapper.readTree(listaPorVendedor.toString());
 		JsonNode nodePorZona = mapper.readTree(listaPorZona.toString());
@@ -37,15 +34,12 @@ public class InformeService {
 
 		informePorVendedor.setTitulo("Ventas por vendedor");
 		informePorVendedor.setDetalleInf(nodePorVendedor);
-		informePorVendedor.setFechaSincronizacion(ultimaSincronizacion);
 		
 		informePorZona.setTitulo("Ventas por zona");
 		informePorZona.setDetalleInf(nodePorZona);
-		informePorZona.setFechaSincronizacion(ultimaSincronizacion);
 		
 		informePorCiudad.setTitulo("Ventas por ciudad");
 		informePorCiudad.setDetalleInf(nodePorCiudad);
-		informePorCiudad.setFechaSincronizacion(ultimaSincronizacion);
 		
 		resultado.add(informePorVendedor);
 		resultado.add(informePorZona);
@@ -58,24 +52,19 @@ public class InformeService {
 		List<Informe> resultado = new ArrayList<Informe>();
 		Informe informePorProducto = new Informe();
 		Informe informePorMes = new Informe();
-		LocalDateTime ultimaSincronizacion = null;
 		
 		List<JSONObject> listaPorProducto = ventasPorProducto();
 		List<JSONObject> listaPorMes = ventasPorMes();
-		
-		ultimaSincronizacion = LocalDateTime.of(2024, 7, 9, 15, 25);
-		
+				
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode nodePorProducto = mapper.readTree(listaPorProducto.toString());
 		JsonNode nodePorMes = mapper.readTree(listaPorMes.toString());
 		
 		informePorProducto.setTitulo("Ventas por producto");
 		informePorProducto.setDetalleInf(nodePorProducto);
-		informePorProducto.setFechaSincronizacion(ultimaSincronizacion);
 		
 		informePorMes.setTitulo("Ventas por mes");
 		informePorMes.setDetalleInf(nodePorMes);
-		informePorMes.setFechaSincronizacion(ultimaSincronizacion);
 		
 		resultado.add(informePorProducto);
 		resultado.add(informePorMes);
